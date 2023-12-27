@@ -14,7 +14,6 @@ const RightPanel = styled.div`
     display: none;
   }
 `;
-
 const StyledText = styled.div`
   font-size: 24px;
   text-decoration: underline;
