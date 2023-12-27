@@ -9,7 +9,7 @@ const RightPanel = styled.div`
   width: 25vw;
   padding: 10px;
   overflow-y: scroll;
-  border-right: 2px solid red; /* Added right border */
+  border-right: 3px solid #f39f5a; /* Added right border */
   &::-webkit-scrollbar {
     display: none;
   }
