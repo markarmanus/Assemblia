@@ -11,7 +11,7 @@ app.use(
 
 app.use("/component", componentsRouter);
 
-app.use("/initialize", (req, res) => {
+app.post("/initialize", (req, res) => {
   res.send("Sank you!!");
 });
 
