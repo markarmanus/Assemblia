@@ -1,37 +1,31 @@
+const CSSFile = require("./CSSFile");
 const JSFile = require("./JSFIle");
 const fs = require("fs");
 
-const ensureServerComponentsFolder = () => {
-  const ServerComponentsPath = __dirname + "/../../../frontend/src/ServerComponents";
-
-  if (fs.existsSync(ServerComponentsPath)) {
-    return true;
-  } else {
-    fs.mkdirSync(ServerComponentsPath);
+const createServerComponentsFolder = async () => {
+  const serverComponentsPath = __dirname + "/../../../frontend/src/ServerComponents";
+  if (!fs.existsSync(serverComponentsPath)) {
+    await fs.mkdirSync(serverComponentsPath);
   }
+  return serverComponentsPath;
 };
 
-const createEditPanelFile = () => {
-  const EditPanelFilePath = __dirname + "/../../../frontend/src/ServerComponents/EditPanel.js";
-  fs.appendFile(EditPanelFilePath, "", (err) => {
-    if (err) {
-      return err;
-    } else {
-      return "the Edit Panel file is created!";
-    }
+const createFile = async (fileName, content) => {
+  const folderPath = await createServerComponentsFolder();
+  await fs.writeFile(`${folderPath}/${fileName}`, content || "", { flag: "a+" }, function (err) {
+    if (err) return console.log(err);
   });
-};
-
-const createFile = async (filePath, fileName) => {
-  ensureServerComponentsFolder();
-  return createEditPanelFile();
-  return new JSFile(filePath, fileName);
+  if (fileName.includes("js")) {
+    return new JSFile(folderPath, fileName);
+  } else if (fileName.includes("css")) {
+    return new CSSFile(folderPath, fileName);
+  }
 };
 
 const deleteFile = async (filePath) => {};
 
-const getFile = async (filePath) => {
-  return new JSFile(filePath);
+const getFile = async (filePath, fileName) => {
+  return new JSFile(filePath, fileName);
 };
 
 module.exports = {
