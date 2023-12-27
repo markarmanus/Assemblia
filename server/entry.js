@@ -3,16 +3,7 @@ const app = express();
 const cors = require("cors");
 const componentsRouter = require("./routes/component");
 const FileManager = require("./libs/FileManager/FileManager");
-const COMPONENT_TYPES = require("./constants/COMPONENT_TYPES");
-const CommentsProcessor = require("./libs/CommentsProcessor/CommentsProcessor");
-
-var id = 1;
-
-const getNextId = () => {
-  id += 1;
-  console.log(id);
-  return id;
-};
+const ReactManager = require("./libs/ReactManager/ReactManager");
 
 app.use(
   cors({
@@ -23,35 +14,14 @@ app.use(
 app.use("/component", componentsRouter);
 
 app.post("/initialize", async (req, res) => {
-  const EditPanelDivId = getNextId();
-  const EditPanelJSCode = `
-${CommentsProcessor.structureComment(CommentsProcessor.MODIFICATION_TYPES.FILE_IMPORT, "EditPanel.js")}
+  await FileManager.createFile("EditPanel.js", ReactManager.EditPanelInitialJS);
+  await FileManager.createFile("EditPanel.css", ReactManager.EditPanelInitialCSS);
+  const appJSFile = await FileManager.getFile("../frontend/src", "App.js");
+  const editPanelId = ReactManager.generateNextId();
+  await appJSFile.addImport(`import EditPanel from "./ServerComponents/EditPanel";`);
+  await appJSFile.addComponent({ type: "EditPanel", id: editPanelId }, { type: "div", id: 0 });
 
-function EditPanel() {
-  return (
-    <div id={${EditPanelDivId}}>
-      ${CommentsProcessor.structureComment(
-        CommentsProcessor.MODIFICATION_TYPES.ADD_COMPONENT_CONTENT,
-        "EditPanel.js",
-        "div",
-        EditPanelDivId
-      )}
-    </div>
-  )
-}
-export default EditPanel
-`;
-
-  const EditPanelCSSCode = `
-#${EditPanelDivId} {
-
-}
-`;
-
-  const JSFile = await FileManager.createFile("EditPanel.js", EditPanelJSCode);
-  const CSSFile = await FileManager.createFile("EditPanel.css", EditPanelCSSCode);
-
-  res.send("HELLO");
+  res.send("Initialized Successfully");
 });
 
 app.listen(5001, () => {
