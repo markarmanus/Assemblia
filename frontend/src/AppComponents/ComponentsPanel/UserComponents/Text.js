@@ -3,7 +3,7 @@ import ClickableWrapper from "./ClickableWrapper";
 export default function Text() {
   return (
     <ClickableWrapper>
-      <Text> Button Section </Text>
+      <p style={{ color: "white" }}> Text Section </p>
     </ClickableWrapper>
   );
 }

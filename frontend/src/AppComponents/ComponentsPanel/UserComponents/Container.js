@@ -3,7 +3,7 @@ import ClickableWrapper from "./ClickableWrapper";
 export default function Container() {
   return (
     <ClickableWrapper>
-      <div> Button Section </div>
+      <di> Container Section </di>
     </ClickableWrapper>
   );
 }
