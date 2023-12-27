@@ -80,17 +80,6 @@ const ExportButton = styled.button`
 `;
 
 function AttributesPanel() {
-  const mainContext = useContext(MainContext);
-  if (mainContext.selectedComponent.type === undefined || mainContext.selectedComponent.id) return;
-  const { type, id } = mainContext.selectedComponent;
-  const cssProps = CSS_PROPS[type]; // => { backgroundColor: { type: "", data: {}}  }
-  Object.entries(cssProps).forEach(([cssProp, cssPropData]) => {
-    // for each css prop we render on the screen ability to change that css property input
-    // switch (cssPropData.type) {
-    //   case INPUT_TYPES.COLOR_PICKER:
-    //     return;
-    // }
-  });
   return (
     <StyledAttributesPanel>
       <PanelTitle>Attribute Panel</PanelTitle>

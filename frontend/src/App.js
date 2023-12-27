@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "./App.css";
 import { MainContext } from "./Context/MainContext";
 import AttributesPanel from "./AppComponents/AttributesPanel/AttributesPanel";
+import ComponentsPanel from "./AppComponents/ComponentsPanel/ComponentsPanel";
 
 const MainPage = styled.div`
   height: 100vh;
