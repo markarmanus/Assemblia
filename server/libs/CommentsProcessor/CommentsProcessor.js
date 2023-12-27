@@ -1,41 +1,31 @@
 const MODIFICATION_TYPES = {
-    IMPORT: 0,
-    CONTENT: 1,
-    STYLE: 2,
-    ADD_COMPONENT:3,
-    DELETE_COMPONENT:4
+  FILE_IMPORT: 0,
+  CSS_FILE_STYLE: 1,
+  ADD_COMPONENT_CONTENT: 2,
 };
 
 const structureComment = (modificationType, fileName, componentType, id) => {
-    if (fileName == null || modificationType == null) {
-        return 'Filename or modificationType can not be null'
+  if (fileName == null || modificationType == null) {
+    throw Error("Filename or modificationType can not be null");
+  }
+  if (fileName.includes(".css")) {
+    if (modificationType === MODIFICATION_TYPES.CSS_FILE_STYLE) {
+      if (id) {
+        return `/* ${fileName}->${id} */`;
+      }
+      throw Error("id can not be null");
     } else {
-        if ( fileName.includes('.css') && id != null ) {
-            if (id) {
-                return 'id can not be null'
-            } else {
-                return `/* ${fileName}->css->${id} */`
-            }
-        } else if (fileName.includes('.css')  ){
-            switch (modificationType) {
-                case MODIFICATION_TYPES.IMPORT:
-                    return `/* ${fileName}->import */`;
-                case MODIFICATION_TYPES.CONTENT:
-                    return `{/* ${fileName}->return->content->${id} */}`;
-                case MODIFICATION_TYPES.STYLE:
-                    return `/* ${fileName}->style->${id} */`;
-                case MODIFICATION_TYPES.ADD_COMPONENT:
-                case MODIFICATION_TYPES.DELETE_COMPONENT:
-                    if (componentType && id ) {
-                        return 'componentType or id can not be null'
-                    } else {
-                        return `{/* ${fileName}->return->${componentType}->${id} */}`;
-                    }
-                default:
-                    return `Unknown modification type in ${fileName}`;
-            }
-        }// return `${fileName}->return`
+      throw Error(`Can only apply Style action to a css file.`);
     }
+  }
+  if (modificationType === MODIFICATION_TYPES.FILE_IMPORT) {
+    return `/* ${fileName}->import */`;
+  }
+  if (modificationType === MODIFICATION_TYPES.ADD_COMPONENT_CONTENT) {
+    if (id == undefined || componentType == undefined) {
+      throw Error("Cant modify content of component without type or Id");
+    }
+    return `{/* ${fileName}->return->${componentType}->${id}->content */}`;
+  }
 };
-
 module.exports = { MODIFICATION_TYPES, structureComment };
