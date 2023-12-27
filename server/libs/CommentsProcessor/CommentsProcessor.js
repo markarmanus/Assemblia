@@ -7,39 +7,28 @@ const MODIFICATION_TYPES = {
 };
 
 const structureComment = (modificationType, fileName, componentType, id) => {
-    let comment = `${fileName}->${id}->`;
     switch (modificationType) {
         case MODIFICATION_TYPES.IMPORT:
-            comment += `IMPORT->${fileName}`;
-            break;
+            return `/* IMPORT->${fileName} */`;
         case MODIFICATION_TYPES.CONTENT:
-            comment += `CONTENT`;
-            break;
+            return `/* ${fileName}->CONTENT->${id} */`;
         case MODIFICATION_TYPES.STYLE:
-            comment += `SYTLE`;
-            break;
+            return `/* ${fileName}->SYTLE->${id} */`;
         case MODIFICATION_TYPES.ADD_COMPONENT:
         case MODIFICATION_TYPES.DELETE_COMPONENT:
             switch (componentType) {
                 case componentType.DIV:
-                    comment += `DIV->RETURN`;
-                    break;
+                    return `/* ${fileName}->DIV->${id} */`;
                 case componentType.CONTAINER:
-                    comment += `CONTAINER`;
-                    break;
+                    return `/* ${fileName}->CONTAINER->${id} */`;
                 case componentType.BUTTON:
-                    comment += `BUTTON`;
-                    break;
+                    return `/* ${fileName}->BUTTON->${id} */`;
                 default:
-                    comment += `Unknown component type`;
-                    break;
+                    return `Unknown component type ${fileName}`;
             }
-            break;
         default:
-            comment += `Unknown modification type in ${fileName}.`;
-            break;
+            return `Unknown modification type in ${fileName}`;
     }
-    return comment;
     // return `${fileName}->return`
 };
 
