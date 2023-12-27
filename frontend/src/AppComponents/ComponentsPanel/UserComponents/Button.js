@@ -1,6 +1,15 @@
 import ClickableWrapper from "./ClickableWrapper";
 import styled from "styled-components";
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const TitleStyle = styled.p`
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+`;
 const ButtonStyle = styled.button`
   background-color: #f39f5a;
   color: black;
@@ -25,7 +34,10 @@ const ButtonStyle = styled.button`
 export default function Button() {
   return (
     <ClickableWrapper>
-      <ButtonStyle>Button Section</ButtonStyle>
+      <ButtonContainer>
+        <TitleStyle>Button</TitleStyle>
+        <ButtonStyle>Button </ButtonStyle>
+      </ButtonContainer>
     </ClickableWrapper>
   );
 }
