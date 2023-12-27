@@ -4,6 +4,7 @@ import "./App.css";
 import { MainContext } from "./Context/MainContext";
 import AttributesPanel from "./AppComponents/AttributesPanel/AttributesPanel";
 import ComponentsPanel from "./AppComponents/ComponentsPanel/ComponentsPanel";
+/* App.js->import */
 
 const MainPage = styled.div`
   height: 100vh;

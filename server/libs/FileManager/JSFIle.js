@@ -14,7 +14,7 @@ const searchAndReplace = (fullPath, searchVal, replaceVal) => {
     });
   });
 };
-class File {
+class JSFile {
   constructor(path, name) {
     this.path = path;
     this.name = name;
@@ -69,9 +69,19 @@ class File {
     const contentWithComment = content + whereToModify;
     searchAndReplace(this.fullPath, whereToModify, contentWithComment);
   }
-
   deleteComponent(id) {}
-  addComponentCSSProperty(id, property, value) {}
-  addImport(importLine) {}
+  /**
+   * adds an import line to end of the import lines.
+   * @constructor
+   * @param {string} importLine - entire line to add to the imports of the file.
+   */
+  addImport(importLine) {
+    const whereToModify = CommentsProcessor.structureComment(
+      CommentsProcessor.MODIFICATION_TYPES.FILE_IMPORT,
+      this.name
+    );
+    const importWithComment = importLine + "\n" + whereToModify;
+    searchAndReplace(this.fullPath, whereToModify, importWithComment);
+  }
 }
-module.exports = File;
+module.exports = JSFile;
