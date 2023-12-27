@@ -1,6 +1,6 @@
 const COMPONENT_TYPES = {
-  CONTAINER: 0,
-  TEXT: 1,
-  BUTTON: 2,
+  CONTAINER: "Container",
+  TEXT: "Text",
+  BUTTON: "Button",
 };
 module.exports = COMPONENT_TYPES;
