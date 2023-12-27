@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 import "./App.css";
 import { MainContext } from "./Context/MainContext";
 
@@ -8,7 +8,7 @@ import AttributesPanel from "./AppComponents/AttributesPanel/AttributesPanel";
 const MainPage = styled.div`
   height: 100vh;
   display: flex;
-`
+`;
 const RightPanel = styled.div`
   background-color: #0000aa;
   width: 18vw;
@@ -16,7 +16,7 @@ const RightPanel = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 
 const EditPanel = styled.div`
   background-color: #fff;
@@ -25,7 +25,7 @@ const EditPanel = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 
 function App() {
   const initialMainContext = {
@@ -38,11 +38,11 @@ function App() {
   return (
     <MainContext.Provider value={{ mainContext, setMainContext }}>
       <MainPage>
-        <RightPanel>
-          Components Panel
-        </RightPanel>
+        <RightPanel>Components Panel</RightPanel>
         <EditPanel>
-          <div className="App">{/* App.js->return */}</div>
+          <div id={0} className="App">
+            {/* App.js->return->div->0->content */}
+          </div>
           Main Component Area
         </EditPanel>
         <AttributesPanel />
