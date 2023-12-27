@@ -4,6 +4,8 @@ import { useContext } from "react";
 import { MainContext } from "../../Context/MainContext";
 import INPUT_TYPES from "../../Constants/INPUT_TYPES";
 
+import ColorPicker from "./Components/ColorPicker";
+
 const StyledAttributesPanel = styled.div`
   background-color: #ddd;
   width: 18vw;
@@ -24,9 +26,11 @@ const PanelTitle = styled.div`
   padding: 10px;
 `;
 const AttributesList = styled.div`
-  background-color: red;
-  height: 100%
-
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -80,10 +84,25 @@ const ExportButton = styled.button`
 `;
 
 function AttributesPanel() {
+  // const { type, id } = mainContext.selectedComponent;
+  // const cssProps = CSS_PROPS[type]; // => { backgroundColor: { type: "", data: {}}  }
+  // Object.entries(cssProps).forEach(([cssProp, cssPropData]) => {
+  //   // for each css prop we render on the screen ability to change that css property input
+  //   // switch (cssPropData.type) {
+  //   //   case INPUT_TYPES.COLOR_PICKER:
+  //   //     return;
+  //   // }
+  // });
+
+  // const mainContext = useContext(MainContext);
+  // if (mainContext.selectedComponent.type === undefined || mainContext.selectedComponent.id) return;
+
   return (
     <StyledAttributesPanel>
       <PanelTitle>Attribute Panel</PanelTitle>
-      <AttributesList>All the shit</AttributesList>
+      <AttributesList>
+        <ColorPicker label={"Hello World!"} />
+      </AttributesList>
       <PanelButtons>
         <DeleteButton onClick={() => console.log("Component Deleted")}>Delete</DeleteButton>
         <ExportButton onClick={() => console.log("Component Exported")}> Export</ExportButton>
