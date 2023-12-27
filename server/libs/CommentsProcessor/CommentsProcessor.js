@@ -7,32 +7,35 @@ const MODIFICATION_TYPES = {
 };
 
 const structureComment = (modificationType, fileName, componentType, id) => {
-    if (fileName === null && id === null) {
-        return 'Filename or ID can not be null'
+    if (fileName == null || modificationType == null) {
+        return 'Filename or modificationType can not be null'
     } else {
-        switch (modificationType) {
-            case MODIFICATION_TYPES.IMPORT:
-                return `/* ${fileName}->import */`;
-            case MODIFICATION_TYPES.CONTENT:
-                return `{/* ${fileName}->return->${id}->CONTENT */}`;
-            case MODIFICATION_TYPES.STYLE:
-                return `/* ${fileName}->SYTLE->${id} */`;
-            case MODIFICATION_TYPES.ADD_COMPONENT:
-            case MODIFICATION_TYPES.DELETE_COMPONENT:
-                switch (componentType) {
-                    case componentType.CONTAINER:
-                        return `{/* ${fileName}->return->${id}->CONTAINER */}`;
-                    case componentType.TEXT:
-                        return `{/* ${fileName}->return->${id}->TEXT */}`;
-                    case componentType.BUTTON:
-                        return `{/* ${fileName}->return->${id}->BUTTON */}`;
-                    default:
-                        return `Unknown component type ${fileName}`;
-                }
-            default:
-                return `Unknown modification type in ${fileName}`;
-        }
-    }// return `${fileName}->return`
+        if ( fileName.includes('.css') && id != null ) {
+            if (id) {
+                return 'id can not be null'
+            } else {
+                return `/* ${fileName}->css->${id} */`
+            }
+        } else if (fileName.includes('.css')  ){
+            switch (modificationType) {
+                case MODIFICATION_TYPES.IMPORT:
+                    return `/* ${fileName}->import */`;
+                case MODIFICATION_TYPES.CONTENT:
+                    return `{/* ${fileName}->return->content->${id} */}`;
+                case MODIFICATION_TYPES.STYLE:
+                    return `/* ${fileName}->style->${id} */`;
+                case MODIFICATION_TYPES.ADD_COMPONENT:
+                case MODIFICATION_TYPES.DELETE_COMPONENT:
+                    if (componentType && id ) {
+                        return 'componentType or id can not be null'
+                    } else {
+                        return `{/* ${fileName}->return->${componentType}->${id} */}`;
+                    }
+                default:
+                    return `Unknown modification type in ${fileName}`;
+            }
+        }// return `${fileName}->return`
+    }
 };
 
 module.exports = { MODIFICATION_TYPES, structureComment };
