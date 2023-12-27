@@ -1,5 +1,9 @@
-function Button() {
-  return <button></button>;
-}
+import ClickableWrapper from "./ClickableWrapper";
 
-export default Button;
+export default function Button() {
+  return (
+    <ClickableWrapper>
+      <button> Button Section </button>
+    </ClickableWrapper>
+  );
+}

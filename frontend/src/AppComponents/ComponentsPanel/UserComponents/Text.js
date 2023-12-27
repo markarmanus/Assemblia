@@ -1,5 +1,9 @@
-function Text() {
-  return <button></button>;
-}
+import ClickableWrapper from "./ClickableWrapper";
 
-export default Text;
+export default function Text() {
+  return (
+    <ClickableWrapper>
+      <Text> Button Section </Text>
+    </ClickableWrapper>
+  );
+}

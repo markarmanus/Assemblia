@@ -1,6 +1,9 @@
-// Component to wrap all of our User Component, allowing them to be clickable.
-function ClickableWrapper() {
-  return <div></div>;
+function ClickableWrapper(props) {
+  function handleClick() {
+    console.log("clicked");
+  }
+
+  return <div onClick={handleClick}>{props.children}</div>;
 }
 
 export default ClickableWrapper;
