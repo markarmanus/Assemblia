@@ -11,7 +11,7 @@ const MainPage = styled.div`
   display: flex;
 `;
 
-const EditPanel = styled.div`
+const EditPanelContainer = styled.div`
   background-color: #fff;
   width: 64vw;
   overflow-y: scroll;
@@ -32,12 +32,11 @@ function App() {
     <MainContext.Provider value={{ mainContext, setMainContext }}>
       <MainPage>
         <ComponentsPanel />
-        <EditPanel>
+        <EditPanelContainer>
           <div id={0} className="App">
             {/* App.js->return->div->0->content */}
           </div>
-          Main Component Area
-        </EditPanel>
+        </EditPanelContainer>
         <AttributesPanel />
       </MainPage>
     </MainContext.Provider>
