@@ -18,33 +18,58 @@ class File {
   constructor(path, name) {
     this.path = path;
     this.name = name;
+    this.fullPath = `${path}/${name}`;
   }
-
-  async createComponent(id, type, content) {
-    // const createComponentComment = CommentsProcessor.structureComment(
-    //   CommentsProcessor.MODIFICATION_TYPES.ADD_COMPONENT,
-    //   `${this.path}/${this.name}`,
-    //   type,
-    //   id
-    // );
-    // const contentComment = CommentsProcessor.structureComment(
-    //   CommentsProcessor.MODIFICATION_TYPES.CONTENT,
-    //   `${this.path}/${this.name}`,
-    //   type,
-    //   id
-    // );
-    const createComponentComment = "{/* HELLOO */}";
-    const contentComment = "{/* HELLOO_CONTENT */}";
+  /**
+   * Creates a new component and adds it to an existing component
+   * @constructor
+   * @param {number} newComponent.id - id of the new component to create
+   * @param {string} newComponent.type - type of new component to create
+   * @param {string} newComponent.content - type of new component to create
+   * @param {number} existingComponent.id - id of existing component to add new component to.
+   * @param {string}existingComponent.type - type of existing component to add new component to.
+   */
+  async addComponent(newComponent, existingComponent) {
+    const whereToModify = CommentsProcessor.structureComment(
+      CommentsProcessor.MODIFICATION_TYPES.ADD_COMPONENT_CONTENT,
+      this.name,
+      existingComponent.type,
+      existingComponent.id
+    );
+    const newComponentContentComment = CommentsProcessor.structureComment(
+      CommentsProcessor.MODIFICATION_TYPES.ADD_COMPONENT_CONTENT,
+      this.name,
+      newComponent.type,
+      newComponent.id
+    );
     const component = `
-    <${type} id={${id}}>
-      ${content || ""}${contentComment}
-    </${type}>
+    <${newComponent.type} id={${newComponent.id}}>
+      ${newComponent.content || ""}${newComponentContentComment}
+    </${newComponent.type}>
 
-    ${createComponentComment}`;
-    searchAndReplace(`${this.path}/${this.name}`, createComponentComment, component);
+    ${whereToModify}`;
+    searchAndReplace(this.fullPath, whereToModify, component);
   }
 
-  addComponentContent(id, content) {}
+  /**
+   * Creates a new component and adds it to an existing component
+   * @constructor
+   * @param {number} existingComponent.id - id of existing component to add new component to.
+   * @param {string} existingComponent.type - type of existing component to add new component to.
+   * @param {string} content - new content to add to component.
+   * @param {boolean} override - weather this should remove the existing content of the component before extending (not supported yet)
+   */
+  modifyComponentContent(existingComponent, content) {
+    const whereToModify = CommentsProcessor.structureComment(
+      CommentsProcessor.MODIFICATION_TYPES.ADD_COMPONENT_CONTENT,
+      this.name,
+      existingComponent.type,
+      existingComponent.id
+    );
+    const contentWithComment = content + whereToModify;
+    searchAndReplace(this.fullPath, whereToModify, contentWithComment);
+  }
+
   deleteComponent(id) {}
   addComponentCSSProperty(id, property, value) {}
   addImport(importLine) {}

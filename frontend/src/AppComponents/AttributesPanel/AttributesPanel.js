@@ -1,4 +1,8 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+import CSS_PROPS from "../../Constants/CSS_PROPS";
+import { useContext } from "react";
+import { MainContext } from "../../Context/MainContext";
+import INPUT_TYPES from "../../Constants/INPUT_TYPES";
 
 const StyledAttributesPanel = styled.div`
   background-color: #ddd;
@@ -9,16 +13,16 @@ const StyledAttributesPanel = styled.div`
   justify-content: space-between;
 
   overflow-y: scroll;
-    &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 const PanelTitle = styled.div`
   font-size: 20px;
   text-align: center;
   border-bottom: 2px solid #888;
   padding: 10px;
-`
+`;
 const AttributesList = styled.div`
   background-color: red;
   height: 100%
@@ -27,7 +31,7 @@ const AttributesList = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 const PanelButtons = styled.div`
   font-size: 20px;
   border-top: 2px solid #888;
@@ -35,9 +39,9 @@ const PanelButtons = styled.div`
 
   display: flex;
   justify-content: space-evenly;
-`
+`;
 const DeleteButton = styled.button`
-  font-size: 18px;  
+  font-size: 18px;
   background-color: #cc0000;
   color: white;
   border: none;
@@ -48,15 +52,15 @@ const DeleteButton = styled.button`
   &:hover {
     background-color: #990000;
     color: white;
-  };
+  }
 
   &:active {
     background-color: #aa0000;
     transform: translateY(2px);
-  };
-`
+  }
+`;
 const ExportButton = styled.button`
-  font-size: 18px;  
+  font-size: 18px;
   background-color: #0000cc;
   color: white;
   border: none;
@@ -67,29 +71,36 @@ const ExportButton = styled.button`
   &:hover {
     background-color: #000099;
     color: white;
-  };
+  }
 
   &:active {
     background-color: #0000aa;
     transform: translateY(2px);
-  };
-`
+  }
+`;
 
 function AttributesPanel() {
+  const mainContext = useContext(MainContext);
+  if (mainContext.selectedComponent.type === undefined || mainContext.selectedComponent.id) return;
+  const { type, id } = mainContext.selectedComponent;
+  const cssProps = CSS_PROPS[type]; // => { backgroundColor: { type: "", data: {}}  }
+  Object.entries(cssProps).forEach(([cssProp, cssPropData]) => {
+    // for each css prop we render on the screen ability to change that css property input
+    // switch (cssPropData.type) {
+    //   case INPUT_TYPES.COLOR_PICKER:
+    //     return;
+    // }
+  });
   return (
     <StyledAttributesPanel>
-      <PanelTitle>
-        Attribute Panel
-      </PanelTitle>
-      <AttributesList>
-        All the shit
-      </AttributesList>
+      <PanelTitle>Attribute Panel</PanelTitle>
+      <AttributesList>All the shit</AttributesList>
       <PanelButtons>
         <DeleteButton onClick={() => console.log("Component Deleted")}>Delete</DeleteButton>
         <ExportButton onClick={() => console.log("Component Exported")}> Export</ExportButton>
       </PanelButtons>
-    </StyledAttributesPanel >
-  )
+    </StyledAttributesPanel>
+  );
 }
 
 export default AttributesPanel;
