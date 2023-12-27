@@ -1,5 +1,7 @@
 function AttributesPanel() {
-  return <div></div>;
+  return <div>
+    Hello World
+  </div>;
 }
 
 export default AttributesPanel;
