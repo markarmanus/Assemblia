@@ -12,7 +12,7 @@ const createServerComponentsFolder = async () => {
 
 const createFile = async (fileName, content) => {
   const folderPath = await createServerComponentsFolder();
-  await fs.writeFile(`${folderPath}/${fileName}`, content || "", { flag: "a+" }, function (err) {
+  await fs.writeFile(`${folderPath}/${fileName}`, content || "", { flag: "w" }, function (err) {
     if (err) return console.log(err);
   });
   if (fileName.includes("js")) {
