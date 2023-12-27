@@ -1,25 +1,14 @@
 const CommentsProcessor = require("../CommentsProcessor/CommentsProcessor");
 const COMPONENT_TYPES = require("../../constants/COMPONENT_TYPES");
-var fs = require("fs");
+const searchAndReplace = require("./Helper");
 
-const searchAndReplace = (fullPath, searchVal, replaceVal) => {
-  fs.readFile(fullPath, "utf8", function (err, data) {
-    if (err) {
-      return console.log(err);
-    }
-    var result = data.replace(searchVal, replaceVal);
-
-    fs.writeFile(fullPath, result, "utf8", function (err) {
-      if (err) return console.log(err);
-    });
-  });
-};
 class JSFile {
   constructor(path, name) {
     this.path = path;
     this.name = name;
     this.fullPath = `${path}/${name}`;
   }
+
   /**
    * Creates a new component and adds it to an existing component
    * @constructor
@@ -48,7 +37,7 @@ class JSFile {
     </${newComponent.type}>
 
     ${whereToModify}`;
-    searchAndReplace(this.fullPath, whereToModify, component);
+    await searchAndReplace(this.fullPath, whereToModify, component);
   }
 
   /**
@@ -59,7 +48,7 @@ class JSFile {
    * @param {string} content - new content to add to component.
    * @param {boolean} override - weather this should remove the existing content of the component before extending (not supported yet)
    */
-  modifyComponentContent(existingComponent, content) {
+  async modifyComponentContent(existingComponent, content) {
     const whereToModify = CommentsProcessor.structureComment(
       CommentsProcessor.MODIFICATION_TYPES.ADD_COMPONENT_CONTENT,
       this.name,
@@ -67,7 +56,7 @@ class JSFile {
       existingComponent.id
     );
     const contentWithComment = content + whereToModify;
-    searchAndReplace(this.fullPath, whereToModify, contentWithComment);
+    await searchAndReplace(this.fullPath, whereToModify, contentWithComment);
   }
   deleteComponent(id) {}
   /**
@@ -75,13 +64,13 @@ class JSFile {
    * @constructor
    * @param {string} importLine - entire line to add to the imports of the file.
    */
-  addImport(importLine) {
+  async addImport(importLine) {
     const whereToModify = CommentsProcessor.structureComment(
       CommentsProcessor.MODIFICATION_TYPES.FILE_IMPORT,
       this.name
     );
     const importWithComment = importLine + "\n" + whereToModify;
-    searchAndReplace(this.fullPath, whereToModify, importWithComment);
+    await searchAndReplace(this.fullPath, whereToModify, importWithComment);
   }
 }
 module.exports = JSFile;
