@@ -23,8 +23,9 @@ const StyledInput = styled.input`
 `;
 
 function ColorPicker(props) {
-  const [initial, setInitial] = useState("#5e72e4");
-  const [color, setColor] = useState({});
+  const [color, setColor] = useState("#5e72e4");
+
+  console.log(color);
 
   return (
     <StyledColorPicker>

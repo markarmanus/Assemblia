@@ -7,9 +7,10 @@ import INPUT_TYPES from "../../Constants/INPUT_TYPES";
 import ColorPicker from "./Components/ColorPicker";
 
 const StyledAttributesPanel = styled.div`
-  background-color: #ddd;
-  width: 18vw;
-  border-left: 2px solid #888;
+  color: white;
+  background-color: #161d30;
+  width: 25vw;
+  border-left: 2px solid #f39f5a;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,9 +21,9 @@ const StyledAttributesPanel = styled.div`
   }
 `;
 const PanelTitle = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   text-align: center;
-  border-bottom: 2px solid #888;
+  border-bottom: 3px solid #f39f5a;
   padding: 10px;
 `;
 const AttributesList = styled.div`
@@ -38,7 +39,7 @@ const AttributesList = styled.div`
 `;
 const PanelButtons = styled.div`
   font-size: 20px;
-  border-top: 2px solid #888;
+  border-top: 3px solid #f39f5a;
   padding: 15px;
 
   display: flex;

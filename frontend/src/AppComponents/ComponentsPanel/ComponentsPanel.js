@@ -7,8 +7,6 @@ const RightPanel = styled.div`
   background-color: #161d30;
   color: white;
   width: 25vw;
-  padding: 10px;
-  overflow-y: scroll;
   border-right: 3px solid #f39f5a; /* Added right border */
   &::-webkit-scrollbar {
     display: none;
@@ -17,7 +15,6 @@ const RightPanel = styled.div`
 
 const StyledText = styled.div`
   font-size: 24px;
-  text-decoration: underline;
   display: flex;
   justify-content: center;
   height: 10vh;
@@ -27,18 +24,18 @@ const StyledText = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
-  padding: 10;
   width: 100%;
-  height: 85vh;
+  height: 90vh;
   align-items: center;
   justify-content: space-around;
+  overflow-y: scroll;
+  border-top: 3px solid #f39f5a;
 `;
 
 function ComponentsPanel() {
   return (
     <RightPanel>
-      <StyledText>Components Panel</StyledText>
+      <StyledText>Add Components</StyledText>
       <FlexContainer>
         <Button />
         <Text />
