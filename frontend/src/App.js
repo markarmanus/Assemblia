@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import "./App.css";
 import { MainContext } from "./Context/MainContext";
-import ComponentsPanel from "./AppComponents/ComponentsPanel/ComponentsPanel";
 import AttributesPanel from "./AppComponents/AttributesPanel/AttributesPanel";
 
 const MainPage = styled.div`
