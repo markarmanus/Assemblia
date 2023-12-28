@@ -3,7 +3,7 @@ import Button from "./UserComponents/Button";
 import Text from "./UserComponents/Text";
 import Container from "./UserComponents/Container";
 import "./ComponentsPanel.css"; // Import the CSS file
-
+import axios from "axios";
 const RightPanel = styled.div`
   background-color: #161d30;
   color: white;
@@ -52,13 +52,19 @@ const TextContainer = styled.div`
 `;
 
 function ComponentsPanel() {
+  const onAddComponent = async (type, content) => {
+    await axios.post("http://localhost:5001/component", {
+      componentType: type,
+      content,
+    });
+  };
   return (
     <RightPanel>
       <StyledText>Add Components</StyledText>
       <FlexContainer>
         <ButtonContainer>
           <TitleStyle>Button</TitleStyle>
-          <Button />
+          <Button onClick={onAddComponent}>Dummy</Button>
         </ButtonContainer>
         <TextContainer>
           <TitleStyle>Label</TitleStyle>
@@ -66,7 +72,7 @@ function ComponentsPanel() {
         </TextContainer>
         <DivContainer>
           <TitleStyle>Div</TitleStyle>
-          <Container />
+          <Container ></Container>
         </DivContainer>
       </FlexContainer>
     </RightPanel>
