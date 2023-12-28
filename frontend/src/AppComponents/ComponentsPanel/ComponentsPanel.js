@@ -4,6 +4,7 @@ import Text from "./UserComponents/Text";
 import Container from "./UserComponents/Container";
 import "./ComponentsPanel.css"; // Import the CSS file
 import axios from "axios";
+
 const RightPanel = styled.div`
   background-color: #161d30;
   color: white;
