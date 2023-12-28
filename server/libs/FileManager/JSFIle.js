@@ -37,7 +37,7 @@ class JSFile {
     </${newComponent.type}>
 
     ${whereToModify}`;
-    await searchAndReplace(this.fullPath, whereToModify, component);
+    await searchAndReplace(this.fullPath, whereToModify, component, true);
   }
 
   /**
@@ -56,7 +56,7 @@ class JSFile {
       existingComponent.id
     );
     const contentWithComment = content + whereToModify;
-    await searchAndReplace(this.fullPath, whereToModify, contentWithComment);
+    await searchAndReplace(this.fullPath, whereToModify, contentWithComment, true);
   }
   deleteComponent(id) {}
   /**
@@ -70,7 +70,7 @@ class JSFile {
       this.name
     );
     const importWithComment = importLine + "\n" + whereToModify;
-    await searchAndReplace(this.fullPath, whereToModify, importWithComment);
+    await searchAndReplace(this.fullPath, whereToModify, importWithComment, true);
   }
 }
 module.exports = JSFile;
