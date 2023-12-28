@@ -2,6 +2,12 @@ const CommentsProcessor = require("../CommentsProcessor/CommentsProcessor");
 const COMPONENT_TYPES = require("../../constants/COMPONENT_TYPES");
 const { searchAndReplace } = require("../Helper");
 
+const propertyMapper = (property) => {
+  switch (property) {
+    case "backgroundColor":
+      return "background-color";
+  }
+};
 class CSSFile {
   constructor(path, name) {
     this.path = path;
@@ -16,7 +22,7 @@ class CSSFile {
       undefined,
       id
     );
-    const content = `${property}: ${value}
+    const content = `${propertyMapper(property)}: ${value};
                     ${whereToModify}`;
     searchAndReplace(this.fullPath, whereToModify, content);
   }

@@ -39,7 +39,11 @@ const getFile = async (filePath, fileName) => {
   if (!filePath) {
     filePath = await createServerComponentsFolder();
   }
-  return new JSFile(filePath, fileName);
+  if (fileName.includes("js")) {
+    return new JSFile(filePath, fileName);
+  } else if (fileName.includes("css")) {
+    return new CSSFile(filePath, fileName);
+  }
 };
 
 module.exports = {
