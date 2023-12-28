@@ -1,31 +1,15 @@
 import ClickableWrapper from "./ClickableWrapper";
-import styled from "styled-components";
+import COMPONENT_TYPES from "../../../Constants/COMPONENT_TYPES";
 
-const ContainerStyle = styled.div`
-  background-color: #f39f5a;
-  color: black;
-  width: 18vw;
-  height: 15vh;
-  padding: 10px;
-  border: 1px solid #f39f5a;
-  border-radius: 8px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  font-size: 18px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-  &:hover {
-    background-color: #e67e22;
-    cursor: pointer;
-  }
-`;
-
-export default function Container({ children }) {
+export default function Container(props) {
+  const content = props.children || "Div";
   return (
-    <ClickableWrapper>
-      <ContainerStyle> {children} </ContainerStyle>
+    <ClickableWrapper
+      onClick={() => {
+        if (props.onClick) props.onClick(COMPONENT_TYPES.CONTAINER, content);
+      }}
+    >
+      <div id={props.id}> {content}</div>
     </ClickableWrapper>
   );
 }

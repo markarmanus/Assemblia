@@ -39,6 +39,7 @@ const ButtonContainer = styled.div`
 const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 20vw;
 `;
 const TitleStyle = styled.p`
   color: white;
@@ -65,16 +66,20 @@ function ComponentsPanel() {
         <ButtonContainer>
           <TitleStyle>Button</TitleStyle>
           <Button id="button" onClick={onAddComponent}>
-            Dummy
+            Button
           </Button>
         </ButtonContainer>
         <TextContainer>
           <TitleStyle>Label</TitleStyle>
-          <Text />
+          <Text id="TextStyle" onClick={onAddComponent}>
+            Text
+          </Text>
         </TextContainer>
         <DivContainer>
           <TitleStyle>Div</TitleStyle>
-          <Container></Container>
+          <Container id="DivStyle" onClick={onAddComponent}>
+            Container
+          </Container>
         </DivContainer>
       </FlexContainer>
     </RightPanel>

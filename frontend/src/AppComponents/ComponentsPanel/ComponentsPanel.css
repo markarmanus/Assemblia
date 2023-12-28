@@ -20,3 +20,41 @@
     background-color: #e67e22;
   }
   
+  #TextStyle {
+    color: #f39f5a;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  #TextStyle:hover {
+    color: #e67e22;
+    cursor: pointer;
+  }
+  
+  #DivStyle {
+    background-color: #f39f5a;
+    color: black;
+    width: 18vw;
+    height: 15vh;
+    padding: 10px;
+    border: 1px solid #f39f5a;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  #DivStyle:hover {
+    background-color: #e67e22;
+  }
+  
