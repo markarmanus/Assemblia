@@ -3,8 +3,8 @@ const { removeSpaceAndNewLines, removeNewLines } = require("../Helper");
 
 var id = 1;
 const generateNextId = () => {
-  id = "C" + id + 1;
-  return id;
+  id = id + 1;
+  return "C" + id;
 };
 const EditPanelDivId = generateNextId();
 const EditPanelInitialJS = `
