@@ -7,7 +7,7 @@ const RightPanel = styled.div`
   background-color: #161d30;
   color: white;
   width: 25vw;
-  border-right: 3px solid #f39f5a; /* Added right border */
+  border-right: 1px solid #f39f5a;
   &::-webkit-scrollbar {
     display: none;
   }
