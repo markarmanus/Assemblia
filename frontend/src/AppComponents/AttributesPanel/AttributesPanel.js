@@ -6,6 +6,7 @@ import INPUT_TYPES from "../../Constants/INPUT_TYPES";
 
 import ColorPicker from "./Components/ColorPicker";
 import Dropdown from "./Components/Dropdown";
+import TextInput from "./Components/TextInput";
 
 const StyledAttributesPanel = styled.div`
   color: white;
@@ -124,6 +125,7 @@ function AttributesPanel() {
       <AttributesList>
         <ColorPicker label={"Some Color:"} onColorChange={console.log} />
         <Dropdown menuItems={testingMenuItems} current={"Item 2"} onItemSelect={console.log} label={"Some Style:"} />
+        <TextInput label={"Some Other Style:"} onInputChange={console.log} />
       </AttributesList>
       <PanelButtons>
         <DeleteButton onClick={() => console.log("Component Deleted")}>Delete</DeleteButton>
