@@ -64,7 +64,9 @@ function ComponentsPanel() {
       <FlexContainer>
         <ButtonContainer>
           <TitleStyle>Button</TitleStyle>
-          <Button onClick={onAddComponent}>Dummy</Button>
+          <Button id="button" onClick={onAddComponent}>
+            Dummy
+          </Button>
         </ButtonContainer>
         <TextContainer>
           <TitleStyle>Label</TitleStyle>
@@ -72,7 +74,7 @@ function ComponentsPanel() {
         </TextContainer>
         <DivContainer>
           <TitleStyle>Div</TitleStyle>
-          <Container ></Container>
+          <Container></Container>
         </DivContainer>
       </FlexContainer>
     </RightPanel>
