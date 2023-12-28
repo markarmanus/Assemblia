@@ -1,6 +1,6 @@
 const CommentsProcessor = require("../CommentsProcessor/CommentsProcessor");
-const COMPONENT_TYPES = require("../../constants/COMPONENT_TYPES");
-const searchAndReplace = require("./Helper");
+const fs = require("node:fs/promises");
+const { searchAndReplace } = require("../Helper");
 
 class JSFile {
   constructor(path, name) {
@@ -11,7 +11,6 @@ class JSFile {
 
   /**
    * Creates a new component and adds it to an existing component
-   * @constructor
    * @param {number} newComponent.id - id of the new component to create
    * @param {string} newComponent.type - type of new component to create
    * @param {string} newComponent.content - type of new component to create
@@ -42,7 +41,6 @@ class JSFile {
 
   /**
    * Creates a new component and adds it to an existing component
-   * @constructor
    * @param {number} existingComponent.id - id of existing component to add new component to.
    * @param {string} existingComponent.type - type of existing component to add new component to.
    * @param {string} content - new content to add to component.
@@ -58,10 +56,18 @@ class JSFile {
     const contentWithComment = content + whereToModify;
     await searchAndReplace(this.fullPath, whereToModify, contentWithComment, true);
   }
+
+  async getContent() {
+    try {
+      return await fs.readFile(this.fullPath, { encoding: "utf8" });
+    } catch (err) {
+      throw Error("Could Not Read File " + this.name);
+    }
+  }
+
   deleteComponent(id) {}
   /**
    * adds an import line to end of the import lines.
-   * @constructor
    * @param {string} importLine - entire line to add to the imports of the file.
    */
   async addImport(importLine) {

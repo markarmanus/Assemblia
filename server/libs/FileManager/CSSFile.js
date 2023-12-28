@@ -1,6 +1,6 @@
 const CommentsProcessor = require("../CommentsProcessor/CommentsProcessor");
 const COMPONENT_TYPES = require("../../constants/COMPONENT_TYPES");
-const searchAndReplace = require("./Helper");
+const { searchAndReplace } = require("../Helper");
 
 class CSSFile {
   constructor(path, name) {
