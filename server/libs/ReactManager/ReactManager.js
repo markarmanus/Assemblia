@@ -14,7 +14,7 @@ import "./EditPanel.css"
 
 function EditPanel() {
   return (
-    <div id={${EditPanelDivId}}>
+    <div id={"${EditPanelDivId}"}>
       ${CommentsProcessor.structureComment(
         CommentsProcessor.MODIFICATION_TYPES.ADD_COMPONENT_CONTENT,
         "EditPanel.js",
@@ -39,7 +39,7 @@ const EditPanelInitialCSS = `
 `;
 
 const getFirstComponentIdInFile = (fileContent) => {
-  const regex = /^(.|\n)*?id=\{(?<id>C\d*)\}/g;
+  const regex = /^(.|\n)*?id=\{"(?<id>C\d*)"\}/g;
   return regex.exec(fileContent)?.groups?.id;
 };
 

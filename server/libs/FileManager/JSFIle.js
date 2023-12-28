@@ -31,7 +31,7 @@ class JSFile {
       newComponent.id
     );
     const component = `
-    <${newComponent.type} id={${newComponent.id}}>
+    <${newComponent.type} id={"${newComponent.id}"}>
       ${newComponent.content || ""}${newComponentContentComment}
     </${newComponent.type}>
 
