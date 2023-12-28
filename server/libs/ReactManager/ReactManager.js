@@ -1,6 +1,7 @@
 const CommentsProcessor = require("../CommentsProcessor/CommentsProcessor");
-var id = 1;
+const { removeSpaceAndNewLines, removeNewLines } = require("../Helper");
 
+var id = 1;
 const generateNextId = () => {
   id = id + 1;
   return id;
@@ -32,4 +33,20 @@ const EditPanelInitialCSS = `
 }
 `;
 
-module.exports = { generateNextId, EditPanelInitialCSS, EditPanelInitialJS };
+const getFirstComponentIdInFile = (fileContent) => {
+  const regex = /^(.|\n)*?id=\{(?<id>\d*)\}/g;
+  return regex.exec(fileContent)?.groups?.id;
+};
+
+const getFirstComponentTypeInFile = (fileContent) => {
+  const regex = /^(.|\n)*?return(.|\n)*?<(?<tag>[a-zA-Z]*)/g;
+  const tag = regex.exec(fileContent)?.groups?.tag;
+  return tag;
+};
+module.exports = {
+  generateNextId,
+  getFirstComponentTypeInFile,
+  getFirstComponentIdInFile,
+  EditPanelInitialCSS,
+  EditPanelInitialJS,
+};

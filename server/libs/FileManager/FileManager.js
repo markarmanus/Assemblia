@@ -28,7 +28,17 @@ const createFile = async (fileName, content) => {
 
 const deleteFile = async (filePath) => {};
 
+/**
+ * adds an import line to end of the import lines.
+ * @constructor
+ * @param {string} filePath - Path of file to get, defaults to path of ServerComponents
+ * @param {string} fileName - file name to get.
+ * @returns {JSFile}
+ */
 const getFile = async (filePath, fileName) => {
+  if (!filePath) {
+    filePath = await createServerComponentsFolder();
+  }
   return new JSFile(filePath, fileName);
 };
 
