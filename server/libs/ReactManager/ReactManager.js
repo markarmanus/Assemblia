@@ -1,7 +1,10 @@
 const CommentsProcessor = require("../CommentsProcessor/CommentsProcessor");
 const { removeSpaceAndNewLines, removeNewLines } = require("../Helper");
 
-var id = 1;
+let id = 1;
+const resetId = () => {
+  id = 1;
+};
 const generateNextId = () => {
   id = id + 1;
   return "C" + id;
@@ -30,12 +33,14 @@ export default EditPanel
 const EditPanelInitialCSS = `
 #${EditPanelDivId} {
   ${CommentsProcessor.structureComment(
-    CommentsProcessor.MODIFICATION_TYPES.CSS_FILE_STYLE,
+    CommentsProcessor.MODIFICATION_TYPES.CSS_FILE_COMPONENT_STYLE,
     "EditPanel.css",
     undefined,
     EditPanelDivId
   )}
 }
+
+${CommentsProcessor.structureComment(CommentsProcessor.MODIFICATION_TYPES.CSS_FILE_END, "EditPanel.css")}
 `;
 
 const getFirstComponentIdInFile = (fileContent) => {
@@ -50,6 +55,7 @@ const getFirstComponentTypeInFile = (fileContent) => {
 };
 module.exports = {
   generateNextId,
+  resetId,
   getFirstComponentTypeInFile,
   getFirstComponentIdInFile,
   EditPanelInitialCSS,

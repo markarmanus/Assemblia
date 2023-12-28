@@ -1,7 +1,8 @@
 const MODIFICATION_TYPES = {
   FILE_IMPORT: 0,
-  CSS_FILE_STYLE: 1,
+  CSS_FILE_COMPONENT_STYLE: 1,
   ADD_COMPONENT_CONTENT: 2,
+  CSS_FILE_END: 3,
 };
 
 const structureComment = (modificationType, fileName, componentType, id) => {
@@ -9,11 +10,13 @@ const structureComment = (modificationType, fileName, componentType, id) => {
     throw Error("Filename or modificationType can not be null");
   }
   if (fileName.includes(".css")) {
-    if (modificationType === MODIFICATION_TYPES.CSS_FILE_STYLE) {
-      if (id) {
-        return `/* ${fileName}->${id} */`;
+    if (modificationType === MODIFICATION_TYPES.CSS_FILE_COMPONENT_STYLE) {
+      if (!id) {
+        throw Error("id can not be null");
       }
-      throw Error("id can not be null");
+      return `/* ${fileName}->${id} */`;
+    } else if (modificationType === MODIFICATION_TYPES.CSS_FILE_END) {
+      return `/* ${fileName}->end */`;
     } else {
       throw Error(`Can only apply Style action to a css file.`);
     }

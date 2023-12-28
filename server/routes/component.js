@@ -13,6 +13,7 @@ componentsRouter.post("/", async (req, res) => {
     }
     try {
       const file = await FileManager.getFile(undefined, "EditPanel.js");
+      const cssFile = await FileManager.getFile(undefined, "EditPanel.css");
       const fileContent = await file.getContent();
       const containerId = ReactManager.getFirstComponentIdInFile(fileContent);
       const containerType = ReactManager.getFirstComponentTypeInFile(fileContent);
@@ -24,6 +25,7 @@ componentsRouter.post("/", async (req, res) => {
       await file.addImport(
         `import ${componentType} from "../AppComponents/ComponentsPanel/UserComponents/${componentType}"`
       );
+      await cssFile.addComponentCSSBlock(newComponentId);
       return res.send({ id: newComponentId });
     } catch (err) {
       console.error(err);

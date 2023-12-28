@@ -15,6 +15,7 @@ app.use(
 app.use("/component", componentsRouter);
 
 app.post("/initialize", async (req, res) => {
+  ReactManager.resetId();
   await FileManager.createFile("EditPanel.js", ReactManager.EditPanelInitialJS);
   await FileManager.createFile("EditPanel.css", ReactManager.EditPanelInitialCSS);
   const appJSFile = await FileManager.getFile("../frontend/src", "App.js");
