@@ -5,6 +5,7 @@ const componentsRouter = require("./routes/component");
 const FileManager = require("./libs/FileManager/FileManager");
 const ReactManager = require("./libs/ReactManager/ReactManager");
 
+app.use(express.json());
 app.use(
   cors({
     origin: "*",
@@ -20,7 +21,6 @@ app.post("/initialize", async (req, res) => {
   const editPanelId = ReactManager.generateNextId();
   await appJSFile.addImport(`import EditPanel from "./ServerComponents/EditPanel";`);
   await appJSFile.addComponent({ type: "EditPanel", id: editPanelId }, { type: "div", id: 0 });
-
   res.send("Initialized Successfully");
 });
 
