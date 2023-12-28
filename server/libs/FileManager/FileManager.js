@@ -1,25 +1,29 @@
 const CSSFile = require("./CSSFile");
 const JSFile = require("./JSFIle");
-const fs = require("fs");
+const fs = require("node:fs/promises");
 
 const createServerComponentsFolder = async () => {
   const serverComponentsPath = __dirname + "/../../../frontend/src/ServerComponents";
-  if (!fs.existsSync(serverComponentsPath)) {
-    await fs.mkdirSync(serverComponentsPath);
+  try {
+    await fs.access(serverComponentsPath);
+  } catch {
+    await fs.mkdir(serverComponentsPath);
   }
   return serverComponentsPath;
 };
 
 const createFile = async (fileName, content) => {
   const folderPath = await createServerComponentsFolder();
-  await fs.writeFile(`${folderPath}/${fileName}`, content || "", { flag: "w" }, function (err) {
-    if (err) throw Error(err);
+  try {
+    await fs.writeFile(`${folderPath}/${fileName}`, content || "", { flag: "w" });
     if (fileName.includes("js")) {
       return new JSFile(folderPath, fileName);
     } else if (fileName.includes("css")) {
       return new CSSFile(folderPath, fileName);
     }
-  });
+  } catch (err) {
+    throw Error(err);
+  }
 };
 
 const deleteFile = async (filePath) => {};
