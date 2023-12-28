@@ -103,7 +103,7 @@ function AttributesPanel() {
     <StyledAttributesPanel>
       <PanelTitle>Attribute Panel</PanelTitle>
       <AttributesList>
-        <ColorPicker label={"Hello World!"} />
+        <ColorPicker label={"Some Color:"} onColorChange={console.log} />
         {/* <Dropdown /> */}
       </AttributesList>
       <PanelButtons>

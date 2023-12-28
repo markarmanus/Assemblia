@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { ColorPicker, Space } from "antd";
 import styled from "styled-components";
 
 const StyledColorPicker = styled.div`
@@ -7,33 +8,28 @@ const StyledColorPicker = styled.div`
   align-items: center;
 `;
 
-const StyledInput = styled.input`
-  // border: 1px solid black;
-  // border-radius: 10px;
-  margin: 0px 5px;
-  width: 30px;
-  height: 30px;
-  // background-color: red;
-  &::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-  // &::-webkit-color-swatch {
-  //   border: none;
-  // }
+const StyledLabel = styled.label`
+  margin: 5px;
 `;
 
-function ColorPicker(props) {
-  const [color, setColor] = useState("#5e72e4");
-
-  console.log(color);
+const CPicker = (props) => {
+  const [colorHex, setColorHex] = useState("#1677ff");
+  const [formatHex, setFormatHex] = useState("hex");
+  const hexString = useMemo(() => {
+    const hex = typeof colorHex === "string" ? colorHex : colorHex.toHexString();
+    if (props.onColorChange && hex) props.onColorChange(hex);
+    return hex;
+  }, [colorHex]);
 
   return (
     <StyledColorPicker>
-      <label>{props.label}</label>
-      <StyledInput type="color" value={color.hex} onChange={(e) => setColor(e.target.value)} />
-      <div>{color}</div>
+      <StyledLabel>{props.label}</StyledLabel>
+      <Space>
+        <ColorPicker format={formatHex} value={colorHex} onChangeComplete={setColorHex} onFormatChange={setFormatHex} />
+        <span>HEX: {hexString}</span>
+      </Space>
     </StyledColorPicker>
   );
-}
+};
 
-export default ColorPicker;
+export default CPicker;
