@@ -12,15 +12,6 @@ const MainPage = styled.div`
   display: flex;
 `;
 
-const EditPanelContainer = styled.div`
-  background-color: #fff;
-  width: 64vw;
-  overflow-y: scroll;
-  2 &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
 function App() {
   const initialMainContext = {
     selectedComponent: {

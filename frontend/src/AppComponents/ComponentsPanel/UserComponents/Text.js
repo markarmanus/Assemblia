@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ClickableWrapper from "./ClickableWrapper";
 import styled from "styled-components";
+import axios from "axios";
 
 const TextWithSymbols = styled.p`
   color: #f39f5a;
@@ -25,7 +26,21 @@ export default function Text({ children }) {
   const textWithSymbols = "&lt; Text &gt;";
 
   const handleClick = () => {
-    setIsClicked(!isClicked);
+    if (true) {
+      // If not clicked, make the Axios POST request
+      setIsClicked(false);
+      axios
+        .post("http://localhost:5001/initialize")
+        .then((response) => {
+          // Handle the response if needed
+          console.log("POST request success:", response.data);
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error("Error making POST request:", error);
+        });
+    }
+    setIsClicked(true);
   };
 
   return (
