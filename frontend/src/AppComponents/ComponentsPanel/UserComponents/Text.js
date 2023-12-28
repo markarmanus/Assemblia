@@ -1,18 +1,6 @@
+import React, { useState } from "react";
 import ClickableWrapper from "./ClickableWrapper";
 import styled from "styled-components";
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 20vw;
-  height: 100%; /* Ensure TextContainer takes the full height */
-`;
-
-const TitleStyle = styled.p`
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-`;
 
 const TextWithSymbols = styled.p`
   color: #f39f5a;
@@ -31,14 +19,22 @@ const TextWithSymbols = styled.p`
   }
 `;
 
-export default function Text() {
+export default function Text({ children }) {
+  const [isClicked, setIsClicked] = useState(true);
+
   const textWithSymbols = "&lt; Text &gt;";
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
   return (
     <ClickableWrapper>
-      <TextContainer>
-        <TitleStyle>Label</TitleStyle>
-        <TextWithSymbols dangerouslySetInnerHTML={{ __html: textWithSymbols }} />
-      </TextContainer>
+      {isClicked ? (
+        <TextWithSymbols onClick={handleClick} dangerouslySetInnerHTML={{ __html: textWithSymbols }} />
+      ) : (
+        <TextWithSymbols onClick={handleClick}>{children}</TextWithSymbols>
+      )}
     </ClickableWrapper>
   );
 }

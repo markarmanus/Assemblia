@@ -1,15 +1,6 @@
 import ClickableWrapper from "./ClickableWrapper";
 import styled from "styled-components";
 
-const DivContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const TitleStyle = styled.p`
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-`;
 const ContainerStyle = styled.div`
   background-color: #f39f5a;
   color: black;
@@ -31,13 +22,10 @@ const ContainerStyle = styled.div`
   }
 `;
 
-export default function Container() {
+export default function Container({ children }) {
   return (
     <ClickableWrapper>
-      <DivContainer>
-        <TitleStyle>Div</TitleStyle>
-        <ContainerStyle> Container </ContainerStyle>
-      </DivContainer>
+      <ContainerStyle> {children} </ContainerStyle>
     </ClickableWrapper>
   );
 }
