@@ -3,7 +3,7 @@ const { removeSpaceAndNewLines, removeNewLines } = require("../Helper");
 
 var id = 1;
 const generateNextId = () => {
-  id = id + 1;
+  id = "C" + id + 1;
   return id;
 };
 const EditPanelDivId = generateNextId();
@@ -29,12 +29,17 @@ export default EditPanel
 
 const EditPanelInitialCSS = `
 #${EditPanelDivId} {
-
+  ${CommentsProcessor.structureComment(
+    CommentsProcessor.MODIFICATION_TYPES.CSS_FILE_STYLE,
+    "EditPanel.css",
+    undefined,
+    EditPanelDivId
+  )}
 }
 `;
 
 const getFirstComponentIdInFile = (fileContent) => {
-  const regex = /^(.|\n)*?id=\{(?<id>\d*)\}/g;
+  const regex = /^(.|\n)*?id=\{(?<id>C\d*)\}/g;
   return regex.exec(fileContent)?.groups?.id;
 };
 
