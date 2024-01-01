@@ -4,6 +4,7 @@ import "./App.css";
 import { MainContext } from "./Context/MainContext";
 import AttributesPanel from "./AppComponents/AttributesPanel/AttributesPanel";
 import ComponentsPanel from "./AppComponents/ComponentsPanel/ComponentsPanel";
+import EditPanel from "./ServerComponents/EditPanel";
 /* App.js->import */
 
 const MainPage = styled.div`
@@ -34,6 +35,8 @@ function App() {
         <ComponentsPanel />
         <EditPanelContainer>
           <div id={0} className="App">
+            <EditPanel id={"C2"}>{/* App.js->return->EditPanel->C2->content */}</EditPanel>
+
             {/* App.js->return->div->0->content */}
           </div>
         </EditPanelContainer>
