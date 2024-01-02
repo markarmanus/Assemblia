@@ -28,13 +28,13 @@ const FlexContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 88vh;
-  align-items: center;
+  padding-left: 25px;
   overflow-y: scroll;
   border-top: 3px solid #f39f5a;
 `;
 const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 `;
 const DivContainer = styled.div`
   display: flex;
@@ -69,12 +69,14 @@ function ComponentsPanel() {
             Container
           </Container>
         </DivContainer>
-        <ButtonContainer>
+        <DivContainer>
           <TitleStyle>Button</TitleStyle>
-          <Button id="button" onClick={onAddComponent}>
-            Button
-          </Button>
-        </ButtonContainer>
+          <ButtonContainer>
+            <Button id="button" onClick={onAddComponent}>
+              Button
+            </Button>
+          </ButtonContainer>
+        </DivContainer>
         <TextContainer>
           <TitleStyle>Label</TitleStyle>
           <Text id="TextStyle" onClick={onAddComponent}>
