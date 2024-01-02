@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-const EditPanelContainer = styled.div`
+const EditPanelContainerStyle = styled.div`
   background-color: #232d48;
   width: 50vw;
   display: flex;
@@ -9,7 +9,7 @@ const EditPanelContainer = styled.div`
 `;
 const LabelContainer = styled.div`
   width: 100%;
-  height: 5vh;
+  height: 10vh;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
@@ -49,19 +49,13 @@ const StyledButton = styled.button`
   }
 `;
 
-function EditorPanel() {
-  const [activeScreen, setActiveScreen] = useState("Editor");
-
-  useEffect(() => {
-    setActiveScreen("Editor");
-  }, []);
-
+const EditorPanelContainer = ({ children, setActiveScreen, activeScreen }) => {
   const handleClick = (screen) => {
     setActiveScreen(screen);
   };
 
   return (
-    <EditPanelContainer>
+    <EditPanelContainerStyle>
       <LabelContainer>
         <StyledButton
           onClick={() => handleClick("Editor")}
@@ -77,11 +71,10 @@ function EditorPanel() {
         </StyledButton>
       </LabelContainer>
       <CanvasContainer>
-        {activeScreen === "Editor" && <div>Editor Screen</div>}
-        {activeScreen === "Code" && <div>Code Screen</div>}
+        {activeScreen === "Editor" ? children : <div style={{ color: "white" }}>Coming Soon !</div>}
       </CanvasContainer>
-    </EditPanelContainer>
+    </EditPanelContainerStyle>
   );
-}
+};
 
-export default EditorPanel;
+export default EditorPanelContainer;

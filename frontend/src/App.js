@@ -4,6 +4,7 @@ import "./App.css";
 import { MainContext } from "./Context/MainContext";
 import AttributesPanel from "./AppComponents/AttributesPanel/AttributesPanel";
 import ComponentsPanel from "./AppComponents/ComponentsPanel/ComponentsPanel";
+import EditorPanelContainer from "./AppComponents/EditorPanelContainer/EditorPanelContainer";
 import EditPanel from "./ServerComponents/EditPanel";
 /* App.js->import */
 
@@ -12,16 +13,9 @@ const MainPage = styled.div`
   display: flex;
 `;
 
-const EditPanelContainer = styled.div`
-  background-color: #fff;
-  width: 64vw;
-  overflow-y: scroll;
-  2 &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
 function App() {
+  const [activeScreen, setActiveScreen] = useState("Editor");
+
   const initialMainContext = {
     selectedComponent: {
       type: undefined,
@@ -33,13 +27,12 @@ function App() {
     <MainContext.Provider value={{ mainContext, setMainContext }}>
       <MainPage>
         <ComponentsPanel />
-        <EditPanelContainer>
+        <EditorPanelContainer setActiveScreen={setActiveScreen} activeScreen={activeScreen}>
           <div id={0} className="App">
             <EditPanel id={"C2"}>{/* App.js->return->EditPanel->C2->content */}</EditPanel>
-
             {/* App.js->return->div->0->content */}
           </div>
-        </EditPanelContainer>
+        </EditorPanelContainer>
         <AttributesPanel />
       </MainPage>
     </MainContext.Provider>
