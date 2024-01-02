@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const EditPanelContainerStyle = styled.div`
   background-color: #232d48;

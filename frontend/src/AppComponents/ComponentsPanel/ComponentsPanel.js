@@ -27,9 +27,8 @@ const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 90vh;
+  height: 88vh;
   align-items: center;
-  justify-content: space-around;
   overflow-y: scroll;
   border-top: 3px solid #f39f5a;
 `;
@@ -64,6 +63,12 @@ function ComponentsPanel() {
     <RightPanel>
       <StyledText>Add Components</StyledText>
       <FlexContainer>
+        <DivContainer>
+          <TitleStyle>Div</TitleStyle>
+          <Container id="DivStyle" onClick={onAddComponent}>
+            Container
+          </Container>
+        </DivContainer>
         <ButtonContainer>
           <TitleStyle>Button</TitleStyle>
           <Button id="button" onClick={onAddComponent}>
@@ -76,8 +81,21 @@ function ComponentsPanel() {
             Text
           </Text>
         </TextContainer>
+
         <DivContainer>
-          <TitleStyle>Div</TitleStyle>
+          <TitleStyle>Input</TitleStyle>
+          <Container id="DivStyle" onClick={onAddComponent}>
+            Container
+          </Container>
+        </DivContainer>
+        <DivContainer>
+          <TitleStyle>Img</TitleStyle>
+          <Container id="DivStyle" onClick={onAddComponent}>
+            Container
+          </Container>
+        </DivContainer>
+        <DivContainer>
+          <TitleStyle>Select</TitleStyle>
           <Container id="DivStyle" onClick={onAddComponent}>
             Container
           </Container>
